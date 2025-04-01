@@ -50,6 +50,11 @@ export class SettingState {
             customValue = JSON.parse(JSON.stringify(result.values));
             const customPayments = [
               {
+                name: 'fashionwithtrends_neokred',
+                status: true,
+                title: 'Pay By UPI INTENT',
+              },
+              {
                 name: 'neoKred',
                 status: false,
                 title: 'Payment by QR',

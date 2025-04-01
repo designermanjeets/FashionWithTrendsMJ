@@ -88,7 +88,7 @@ export class AddressModalComponent {
     .subscribe((value) => {
       if(value && value.toString().length > 5) {
         const checkIfPinCodeExists = this.officeNameData.filter((dataz: any) => dataz.OfficeName == this.form.controls['area'].value);
-        if(checkIfPinCodeExists[0].Pincode !== value) {
+        if(!checkIfPinCodeExists.length || checkIfPinCodeExists[0].Pincode !== value) {
           this.checkIfPinCodeExists = false;
           this.filterPinCodeAreas = [];
           this.filterPinCodeAreas = this.pinCodeAreaOfficeCircleDataJSON.filter((dataz: any) => dataz.Pincode == value);
