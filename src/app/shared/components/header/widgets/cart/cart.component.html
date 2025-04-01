@@ -1,7 +1,8 @@
 <!-- Cart Style Basic -->
+ <!--d-md-inline-block d-none -->
 <app-button
   [type]="'button'"
-  [class]="'btn p-0 position-relative d-md-inline-block d-none header-wishlist'"
+  [class]="'btn p-0 position-relative header-wishlist'"
   [spinner]="false"
   [id]="'cart_sidebar_btn'"
   (click)="cartStyle == 'cart_sidebar' && cartToggle(true)" *ngIf="style == 'basic'">
