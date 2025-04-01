@@ -28,6 +28,7 @@ import { interval } from 'rxjs';
 import { delay, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { OrderService } from '../../../shared/services/order.service';
 import { v4 as uuidv4 } from 'uuid';
+import { NotificationService } from '../../../shared/services/notification.service';
 // import { PaymentInitModal } from 'pg-test-project';
 // import * as React from 'react';
 
@@ -93,7 +94,8 @@ export class CheckoutComponent {
     private formBuilder: FormBuilder, public cartService: CartService,
         private modalService: NgbModal,
         private sanitizer: DomSanitizer,
-        private orderService: OrderService
+        private orderService: OrderService,
+        private notificationService: NotificationService
       ) {
     this.store.dispatch(new GetSettingOption());
 
@@ -885,6 +887,7 @@ export class CheckoutComponent {
               window.location.href = zyaadaPayData.payment_url;
             } else {
               console.error("Invalid response: Payment link is missing.");
+              this.notificationService.showError(zyaadaPayData.message);
             }
           } catch (error) {
               console.error("Error parsing Zyaada Pay response:", error);
