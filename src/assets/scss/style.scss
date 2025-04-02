@@ -334,19 +334,10 @@ $border-radius: 4px;
 h6.byers {
   display: none;
 }
-li.right-side.search-icon.search-full-icon.d-inline-block {
-  display: none !important;
-}
-#ngb-accordion-item-9-collapse .category-list li:nth-child(1),
-#ngb-accordion-item-9-collapse .category-list li:nth-child(2) {
-    display: none;
-}
-#ngb-accordion-item-4-collapse .category-list li:nth-child(1),
-#ngb-accordion-item-4-collapse .category-list li:nth-child(2) {
-    display: none;
-}
-.category-list li:nth-child(1),
-.category-list li:nth-child(2) {
+
+
+app-collection-price-filter .category-list li:nth-child(1),
+app-collection-price-filter .category-list li:nth-child(2) {
     display: none;
 }
 

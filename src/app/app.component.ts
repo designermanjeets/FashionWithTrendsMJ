@@ -94,7 +94,7 @@ export class AppComponent {
     
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
-        if(event.url.includes('/success')){
+        if(event.url.includes('/success') || event.url.includes('/error')){
           setTimeout(() => {
             const getOrderId = localStorage.getItem('order_id');
             if(getOrderId){
