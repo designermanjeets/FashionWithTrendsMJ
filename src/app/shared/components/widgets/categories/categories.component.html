@@ -53,7 +53,9 @@
   <owl-carousel-o [options]="sliderOption">
     <ng-template carouselSlide *ngFor="let category of categories">
       <div *ngIf="theme == 'paris'">
-        <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="category-box category-dark"
+        <a href="javascript:void(0)"[routerLink]="['/collections']" 
+        [queryParams]="{ category: category.slug, sortBy: 'asc' }" 
+        [queryParams]="{ category: category.slug, sortBy: 'asc' }"class="category-box category-dark"
           [class.active]="selectedCategorySlug.length && selectedCategorySlug.includes(category.slug!)">
           <img [src]="image ? image : 'assets/images/shape.png'" class="background-image" [alt]="category?.name">
           <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
@@ -62,7 +64,9 @@
         </a>
       </div>
       <div *ngIf="theme == 'madrid'">
-        <a [routerLink]="['/category', category.slug ]" class="category-box-list d-block">
+        <a [routerLink]="['/collections']" 
+        [queryParams]="{ category: category.slug, sortBy: 'asc' }"
+        [queryParams]="{ category: category.slug, sortBy: 'asc' }" class="category-box-list d-block">
           <div  class="category-name">
             <h4>{{ category.name }}</h4>
             <h6>{{ category.products_count }} {{ 'items' | translate }}</h6>
@@ -82,7 +86,8 @@
       </div>
       <div *ngIf="theme == 'rome'">
         <div class="shop-category-box border-0">
-          <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="circle-1">
+          <a href="javascript:void(0)" [routerLink]="['/collections']" 
+          [queryParams]="{ category: category.slug, sortBy: 'asc' }" class="circle-1">
             <img
               [src]="category?.category_image ? category?.category_image?.original_url : 'assets/images/category.png'"
               [alt]="category?.name">
@@ -104,7 +109,8 @@
     <ng-template carouselSlide *ngFor="let category of categories">
       <div>
         <div class="shop-category-box border-0">
-          <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="circle-1">
+          <a href="javascript:void(0)" [routerLink]="['/collections']" 
+          [queryParams]="{ category: category.slug, sortBy: 'asc' }" class="circle-1">
             <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
               [alt]="category?.name">
           </a>
@@ -138,7 +144,8 @@
 <!--- Category Style Dropdown -->
 <ul class="category-list" *ngIf="categories?.length && style == 'dropdown'">
   <li class="onhover-category-list" *ngFor="let category of categories">
-    <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="category-name">
+    <a href="javascript:void(0)" [routerLink]="['/collections']" 
+    [queryParams]="{ category: category.slug, sortBy: 'asc' }" class="category-name">
       <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
         [alt]="category?.name">
       <h6>{{ category?.name }}</h6>
@@ -175,7 +182,8 @@
           <owl-carousel-o [options]="sliderOption">
             <ng-template carouselSlide *ngFor="let category of categories">
               <div>
-                <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]" class="category-box">
+                <a href="javascript:void(0)" [routerLink]="['/collections']" 
+                [queryParams]="{ category: category.slug, sortBy: 'asc' }" class="category-box">
                   <img
                     [src]="category?.category_image ? category?.category_image?.original_url : 'assets/images/category.png'"
                     [alt]="category?.name" class="img-fluid">
@@ -207,7 +215,8 @@
     <owl-carousel-o [options]="sliderOption">
       <ng-template carouselSlide *ngFor="let category of categories">
         <div class="cate-box">
-          <a href="javascript:void(0)" [routerLink]="['/category', category.slug ]">
+          <a href="javascript:void(0)" [routerLink]="['/collections']" 
+          [queryParams]="{ category: category.slug, sortBy: 'asc' }">
             <img [src]="category?.category_icon ? category?.category_icon?.original_url : 'assets/images/category.png'"
               [alt]="category?.name">
           </a>
