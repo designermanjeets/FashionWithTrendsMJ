@@ -334,4 +334,10 @@ $border-radius: 4px;
 h6.byers {
   display: none;
 }
-//
+
+
+app-collection-price-filter .category-list li:nth-child(1),
+app-collection-price-filter .category-list li:nth-child(2) {
+    display: none;
+}
+
