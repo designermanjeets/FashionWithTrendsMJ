@@ -311,6 +311,9 @@ export class CheckoutComponent {
       case 'fashionwithtrends_neokred':
         this.checkout(value);
         break;
+      case 'fashionwithtrends_neokred2':
+        this.checkout(value);
+        break;
       default:
         break;
     }
@@ -902,6 +905,54 @@ export class CheckoutComponent {
     });
   }
 
+  initiateFashionWithTrendsNeoCredIntent2(payment_method: string, uuid: any, order_result: any) {
+    const userData = localStorage.getItem('account');
+    const parsedUserData = JSON.parse(userData || '{}')?.user || {};
+
+    const payload = {
+      uuid,
+      ...parsedUserData,
+      checkout: this.storeData?.order?.checkout
+    };
+
+    this.cartService.initiateFashionWithTrendsNeoCredIntent2({
+      uuid: payload.uuid,
+      email: payload.email,
+      total: this.storeData?.order?.checkout?.total?.total,
+      phone: parsedUserData.phone,
+      name: parsedUserData.name,
+      address: `${parsedUserData.address?.[0]?.city || ''} ${parsedUserData.address?.[0]?.area || ''}`
+    }).subscribe({
+      next: (response) => {
+        if (response?.R && response?.data) {
+          try {
+            const zyaadaPayData = response.data;
+            
+            if (zyaadaPayData?.payment_url) {
+              // Store payment info in session storage
+              sessionStorage.setItem('payment_uuid', uuid);
+              sessionStorage.setItem('payment_method', payment_method);
+              sessionStorage.setItem('payment_action', JSON.stringify(this.form.value));
+              localStorage.setItem('order_id', JSON.stringify(order_result.order_number));
+              // Open in current tab
+              window.location.href = zyaadaPayData.payment_url;
+            } else {
+              console.error("Invalid response: Payment link is missing.");
+              this.notificationService.showError(zyaadaPayData.message);
+            }
+          } catch (error) {
+              console.error("Error parsing Zyaada Pay response:", error);
+          }
+        } else {
+          console.error("Payment initiation failed:", response?.msg);
+        }
+      },
+      error: (err) => {
+        console.log("Error initiating payment:", err);
+      }
+    });
+  }
+
   async openNeoKredModal(data: any) {
     this.payByNeoKredIntentSaveData = data;
     console.log(this.payByNeoKredIntentSaveData);
@@ -1080,6 +1131,25 @@ export class CheckoutComponent {
         ).subscribe({
           next: (result) => {
             this.initiateFashionWithTrendsNeoCredIntent(this.payment_method, uuid, result);
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
+      }
+      if(this.payment_method === 'fashionwithtrends_neokred2') {
+        this.orderService.placeOrder(action?.payload).pipe(
+          tap({
+            next: result => {
+              console.log(result);
+            },
+            error: err => {
+              throw new Error(err?.error?.message);
+            }
+          })
+        ).subscribe({
+          next: (result) => {
+            this.initiateFashionWithTrendsNeoCredIntent2(this.payment_method, uuid, result);
           },
           error: (err) => {
             console.log(err);

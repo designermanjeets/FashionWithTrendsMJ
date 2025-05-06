@@ -73,6 +73,11 @@ export class SettingState {
                 icon: './assets/images/cash_free.jpg',
               },
               {
+                name: 'fashionwithtrends_neokred2',
+                status: true,
+                title: 'Pay By UPI INTENT2',
+              },
+              {
                 name: 'sub_paisa',
                 status: false,
                 title: 'Sab Paisa',
