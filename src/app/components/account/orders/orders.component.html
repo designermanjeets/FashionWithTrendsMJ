@@ -24,7 +24,7 @@
                         <td>
                             <!-- {{ order?.payment_method?.toUpperCase() }} -->
                               <span *ngIf="order?.payment_method === 'fashionwithtrends_neokred'">NeoKred</span>
-                              <span *ngIf="order?.payment_method !== 'fashionwithtrends_neokred'">Suraj Cash Free</span>
+                              <span *ngIf="order?.payment_method === 'zyaada_pay'">Suraj Cash Free</span>
                               <span *ngIf="order?.payment_method === 'fashionwithtrends_neokred2'">Pay By UPI INTENT2</span>
                               <!-- <span *ngIf="order?.payment_method === 'zyaada_pay'">Suraj Cash Free</span>
                               <span *ngIf="order?.payment_method === 'neoKred'">Fashion with Trends NeoKred</span>
