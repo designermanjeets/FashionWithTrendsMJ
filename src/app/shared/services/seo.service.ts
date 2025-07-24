@@ -4,7 +4,7 @@ import { Observable, filter } from 'rxjs';
 import { ThemeOptionState } from '../state/theme-option.state';
 import { Meta, Title } from '@angular/platform-browser';
 import { ProductState } from '../state/product.state';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BlogState } from '../state/blog.state';
 import { BrandState } from '../state/brand.state';
 import { PageState } from '../state/page.state';
@@ -42,7 +42,7 @@ export class SeoService {
   public blog: Blog;
   public page: Page;
   public brand: Brand;
-  public category: Category;
+  public category: Category[];
   public themeOption: Option;
   public scoContent: any = {};
   public setting: Values;
@@ -122,8 +122,8 @@ export class SeoService {
         }
       }
       this.customSCO();
-    } else if(path.includes('category')) {
-      if(this.category) {
+    } else if(path.includes('category') || path.includes('collections')) {
+      if(this.category && this.category.length > 0) {
         this.scoContent = {
           ...this.scoContent,
           'url': window.location.href,
