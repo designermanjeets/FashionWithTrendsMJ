@@ -42,7 +42,7 @@ export class SeoService {
   public blog: Blog;
   public page: Page;
   public brand: Brand;
-  public category: Category[];
+  public category: Category;
   public themeOption: Option;
   public scoContent: any = {};
   public setting: Values;
@@ -123,7 +123,7 @@ export class SeoService {
       }
       this.customSCO();
     } else if(path.includes('category') || path.includes('collections')) {
-      if(this.category && this.category.length > 0) {
+      if(this.category) {
         this.scoContent = {
           ...this.scoContent,
           'url': window.location.href,
