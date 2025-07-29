@@ -49,7 +49,7 @@ export class SeoService {
  
   // Default SEO values
   private readonly DEFAULT_TITLE = "Ultimate Fashion Hub | Men's Fashion | Women's Fashion | Sports Fashion";
-  private readonly DEFAULT_DESCRIPTION = "Fashion with Trends serves all your curated-fashion needs including men's fashion, women's fashion, and sportswear categories that match your personality";
+  private readonly DEFAULT_DESCRIPTION = "Fashion with Trends serves all your curated-fashion needs including men's fashion, women's fashion, and sportswear categories that match your personality and elevate your everyday look.";
  
   constructor(private meta: Meta, private router: Router,
     private titleService: Title,
