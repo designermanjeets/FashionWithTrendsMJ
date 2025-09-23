@@ -42,7 +42,10 @@ export class RegisterComponent {
     private notificationService: NotificationService
   ) {
     this.form = this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[A-Za-z ]+$/)
+      ]),
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
       country_code: new FormControl('91', [Validators.required]),
@@ -82,6 +85,43 @@ export class RegisterComponent {
       this.form.getError('mismatch') &&
       this.form.get('password_confirmation')?.touched
     );
+  }
+
+  // Allow only alphabets and space in name field (blocks digits/special chars)
+  allowOnlyAlphabets(event: KeyboardEvent) {
+    const key = event.key;
+    const isAllowed = /^[A-Za-z ]$/.test(key) || key === 'Backspace' || key === 'Tab' || key === 'ArrowLeft' || key === 'ArrowRight' || key === 'Delete' || key === 'Home' || key === 'End';
+    if (!isAllowed) {
+      event.preventDefault();
+    }
+  }
+
+  // Sanitize pasted/typed value for name to strip non-letters/spaces
+  sanitizeNameInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^A-Za-z ]+/g, '');
+    if (sanitized !== input.value) {
+      this.form.controls['name'].setValue(sanitized, { emitEvent: false });
+    }
+  }
+
+  // Allow only digits in phone field (blocks letters/special chars)
+  allowOnlyDigits(event: KeyboardEvent) {
+    const key = event.key;
+    const isAllowed = /[0-9]/.test(key) || key === 'Backspace' || key === 'Tab' || key === 'ArrowLeft' || key === 'ArrowRight' || key === 'Delete' || key === 'Home' || key === 'End';
+    if (!isAllowed) {
+      event.preventDefault();
+    }
+  }
+
+  // Sanitize pasted/typed value for phone to keep only digits and max length 10
+  sanitizePhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const cleaned = input.value.replace(/\D+/g, '').slice(0, 10);
+    const current = (this.form.controls['phone'].value ?? '').toString();
+    if (cleaned !== current) {
+      this.form.controls['phone'].setValue(cleaned, { emitEvent: false });
+    }
   }
 
   submit() {

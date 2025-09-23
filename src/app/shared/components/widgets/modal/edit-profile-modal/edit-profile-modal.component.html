@@ -15,7 +15,7 @@
                 <div class="col-xxl-12">
                     <div class="">
                         <label class="form-label" for="name">{{ 'full_name' | translate }}</label>
-                        <input class="form-control" id="name" type="text" placeholder="{{ 'enter_name' | translate }}" formControlName="name" />
+                        <input class="form-control" id="name" type="text" placeholder="{{ 'enter_name' | translate }}" formControlName="name" (keydown)="allowOnlyAlphabets($event)" (input)="sanitizeNameInput($event)" />
                         <div class="invalid-feedback" *ngIf="form?.controls?.['name']?.touched && form.controls['name']?.errors?.['required']">
                             {{ 'name_is_required' | translate }}
                         </div>
@@ -50,7 +50,7 @@
                                 </div>
                             </ng-template>
                         </select2>
-                        <input type="number" class="form-control intl-input-padding" formControlName="phone" placeholder="{{ 'enter_phone' | translate }}" name="phone">
+                        <input type="text" inputmode="numeric" class="form-control intl-input-padding" formControlName="phone" placeholder="{{ 'enter_phone' | translate }}" name="phone" (keydown)="allowOnlyDigits($event)" (input)="sanitizePhoneInput($event)">
                         <div class="invalid-feedback" *ngIf="form.controls['phone'].touched && form.controls['phone'].errors?.['required']">
                             {{ 'phone_number_is_required' | translate }}
                         </div>

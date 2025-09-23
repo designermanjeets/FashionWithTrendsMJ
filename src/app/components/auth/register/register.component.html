@@ -17,7 +17,7 @@
                         <form class="row g-4" [formGroup]="form" (ngSubmit)="submit()">
                             <div class="col-12">
                                 <div class="form-floating log-in-form">
-                                    <input type="name" class="form-control" id="name" id="name" formControlName="name" placeholder="{{ 'Name' | translate }}">
+                                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'Name' | translate }}" (keydown)="allowOnlyAlphabets($event)" (input)="sanitizeNameInput($event)">
                                     <label for="name">{{ 'Full Name' | translate }}</label>
                                     <div *ngIf="form.controls['name'].touched && form.controls['name'].errors?.['required']" class="invalid-feedback">{{ 'name_is_required' | translate }}</div>
                                 </div>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-12 phone-field">
                                 <div class="form-floating log-in-form">
-                                    <input type="number" class="form-control" id="phone" id="phone" formControlName="phone" placeholder="{{ 'Phone' | translate }}">
+                                    <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="{{ 'Phone' | translate }}" inputmode="numeric" (keydown)="allowOnlyDigits($event)" (input)="sanitizePhoneInput($event)">
                                     <label for="phone">{{ 'Phone Number' | translate }}</label>
                                     <div *ngIf="form.controls['phone'].touched && form.controls['phone'].errors?.['required']" class="invalid-feedback">{{ 'Phone Number Is Required' | translate }}</div>
                                     <div *ngIf="form.controls['phone'].touched && form.controls['phone'].errors?.['invalid']" class="invalid-feedback">{{ 'Phone Number must be 10 digits.' }}</div>

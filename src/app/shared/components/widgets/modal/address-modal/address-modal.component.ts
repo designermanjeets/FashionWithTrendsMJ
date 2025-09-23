@@ -57,7 +57,7 @@ export class AddressModalComponent {
 
   ) {
     this.form = this.formBuilder.group({
-      title: new FormControl('', [Validators.required]),
+      title: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
       street: new FormControl('', [Validators.required]),
       state_id: new FormControl('', [Validators.required]),
       country_id: new FormControl('', [Validators.required]),
@@ -69,8 +69,19 @@ export class AddressModalComponent {
     })
 
     this.form.controls['phone']?.valueChanges.subscribe((value) => {
+      if(value && value.toString().length < 10) {
+        this.form.controls['phone'].markAsTouched();
+        this.form.controls['phone'].setErrors({invalid: true});
+      }
       if(value && value.toString().length > 10) {
-        this.form.controls['phone']?.setValue(+value.toString().slice(0, 10));
+        this.form.controls['phone']?.setValue(value.toString().slice(0, 10), { emitEvent: false });
+      }
+      if(value && value.toString().length === 10) {
+        if (this.form.controls['phone'].errors) {
+          const { invalid, ...rest } = this.form.controls['phone'].errors as any;
+          const newErrors = Object.keys(rest).length ? rest : null;
+          this.form.controls['phone'].setErrors(newErrors);
+        }
       }
     });
 
@@ -347,6 +358,43 @@ export class AddressModalComponent {
   ngOnDestroy() {
     if(this.modalOpen) {
       this.modalService.dismissAll();
+    }
+  }
+
+  // Allow only alphabets and space for title field
+  allowOnlyAlphabets(event: KeyboardEvent) {
+    const key = event.key;
+    const isAllowed = /^[A-Za-z ]$/.test(key) || key === 'Backspace' || key === 'Tab' || key === 'ArrowLeft' || key === 'ArrowRight' || key === 'Delete' || key === 'Home' || key === 'End';
+    if (!isAllowed) {
+      event.preventDefault();
+    }
+  }
+
+  // Sanitize pasted/typed value for title to strip non-letters/spaces
+  sanitizeTitleInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^A-Za-z ]+/g, '');
+    if (sanitized !== input.value) {
+      this.form.controls['title'].setValue(sanitized, { emitEvent: false });
+    }
+  }
+
+  // Allow only digits in phone field
+  allowOnlyDigits(event: KeyboardEvent) {
+    const key = event.key;
+    const isAllowed = /[0-9]/.test(key) || key === 'Backspace' || key === 'Tab' || key === 'ArrowLeft' || key === 'ArrowRight' || key === 'Delete' || key === 'Home' || key === 'End';
+    if (!isAllowed) {
+      event.preventDefault();
+    }
+  }
+
+  // Sanitize phone input to keep digits only up to 10
+  sanitizePhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const cleaned = input.value.replace(/\D+/g, '').slice(0, 10);
+    const current = (this.form.controls['phone'].value ?? '').toString();
+    if (cleaned !== current) {
+      this.form.controls['phone'].setValue(cleaned, { emitEvent: false });
     }
   }
 
