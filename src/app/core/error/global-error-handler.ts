@@ -32,6 +32,7 @@ export class GlobalErrorHandler implements ErrorHandler {
           message = errorService.getClientErrorMessage(error);
           if(!message.includes('Something Went Wrong')) {
             notifier.showError(message);
+            
           }
         }
         // Always log errors
