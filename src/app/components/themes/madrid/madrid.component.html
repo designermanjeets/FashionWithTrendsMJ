@@ -1,18 +1,22 @@
-<!-- Home Section Start -->
-<section class="home-section-2 home-section-bg pt-0 overflow-hidden" *ngIf="data?.content?.home_banner">
-  <app-theme-home-banner [theme]="'madrid'" [data]="data?.content?.home_banner"></app-theme-home-banner>
+
+<!-- Stylexio Banner Start -->
+<section class="banner-section pt-5 pb-5">
+  <div class="container-fluid-lg">
+ <a href="/collections?sortBy=asc">
+    <img src="assets/images/offer.png" alt="Stylexio promotional banner" class="img-fluid w-100" loading="lazy">
+  </a>
+  </div>
 </section>
+<!-- Banner Section Start -->
+
+<!-- Home Section Start -->
+<!-- <section class="home-section-2 home-section-bg pt-0 overflow-hidden" *ngIf="data?.content?.home_banner">
+  <app-theme-home-banner [theme]="'madrid'" [data]="data?.content?.home_banner"></app-theme-home-banner>
+</section> -->
 <!-- Home Section End -->
 
 
 
-<!-- Stylexio Banner Start -->
-<section>
-  <div class="container-fluid-lg">
-    <img src="assets/images/offer.png" alt="Stylexio promotional banner" class="img-fluid w-100" loading="lazy">
-  </div>
-</section>
-<!-- Banner Section Start -->
 <section class="banner-section ratio_60"
   *ngIf="data?.content?.featured_banners?.status">
   <app-theme-banner [style]="'horizontal'" [banners]="data?.content?.featured_banners?.banners"></app-theme-banner>
