@@ -335,7 +335,7 @@ export class CheckoutComponent {
       { 
         uuid: payload.uuid, 
         email: payload.email,
-        total: this.storeData?.order?.checkout?.total?.total,
+        total: this.checkoutTotal?.total?.total,
         phone: JSON.parse(userData || '').user.phone,
         name: JSON.parse(userData || '').user.name,
         address: JSON.parse(userData || '').user.address[0].city + ' ' + JSON.parse(userData || '').user.address[0].area
@@ -584,7 +584,7 @@ export class CheckoutComponent {
     this.cartService.initiateCashFreeIntent({
       uuid: payload.uuid,
       email: payload.email,
-      total: this.storeData?.order?.checkout?.total?.total,
+      total: this.checkoutTotal?.total?.total,
       phone: parsedUserData.phone,
       name: parsedUserData.name,
       address: `${parsedUserData.address?.[0]?.city || ''} ${parsedUserData.address?.[0]?.area || ''}`
@@ -718,7 +718,7 @@ export class CheckoutComponent {
     this.cartService.initiateZyaadaPayIntent({
       uuid: payload.uuid,
       email: payload.email,
-      total: this.storeData?.order?.checkout?.total?.total,
+      total: this.checkoutTotal?.total?.total,
       phone: parsedUserData.phone,
       name: parsedUserData.name,
       address: `${parsedUserData.address?.[0]?.city || ''} ${parsedUserData.address?.[0]?.area || ''}`
@@ -870,7 +870,7 @@ export class CheckoutComponent {
     this.cartService.initiateFashionWithTrendsNeoCredIntent({
       uuid: payload.uuid,
       email: payload.email,
-      total: this.storeData?.order?.checkout?.total?.total,
+      total: this.checkoutTotal?.total?.total,
       phone: parsedUserData.phone,
       name: parsedUserData.name,
       address: `${parsedUserData.address?.[0]?.city || ''} ${parsedUserData.address?.[0]?.area || ''}`
@@ -918,7 +918,7 @@ export class CheckoutComponent {
     this.cartService.initiateFashionWithTrendsNeoCredIntent2({
       uuid: payload.uuid,
       email: payload.email,
-      total: this.storeData?.order?.checkout?.total?.total,
+      total: this.checkoutTotal?.total?.total,
       phone: parsedUserData.phone,
       name: parsedUserData.name,
       address: `${parsedUserData.address?.[0]?.city || ''} ${parsedUserData.address?.[0]?.area || ''}`
