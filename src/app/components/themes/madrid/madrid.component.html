@@ -1,10 +1,39 @@
 
 <!-- Stylexio Banner Start -->
-<section class="banner-section pt-5 pb-5">
+<section class="banner-section pt-5 pb-3">
   <div class="container-fluid-lg">
- <a href="/collections?sortBy=asc">
-    <img src="assets/images/offer.png" alt="Stylexio promotional banner" class="img-fluid w-100" loading="lazy">
-  </a>
+    <div class="banner-slider" 
+         [class.paused]="isPaused"
+         (mouseenter)="pauseAutoSlide()" 
+         (mouseleave)="resumeAutoSlide()">
+      <div class="slider-container">
+        <div class="slider-wrapper" [style.transform]="'translateX(' + currentSlide * -100 + '%)'">
+          <div class="slide" *ngFor="let image of bannerImages; let i = index">
+            <a href="/collections?sortBy=asc">
+              <img [src]="image.src" [alt]="image.alt" class="img-fluid w-100">
+            </a>
+          </div>
+        </div>
+        
+        <!-- Navigation Dots -->
+        <div class="slider-dots">
+          <span 
+            *ngFor="let image of bannerImages; let i = index"
+            class="dot"
+            [class.active]="i === currentSlide"
+            (click)="goToSlide(i)">
+          </span>
+        </div>
+        
+        <!-- Navigation Arrows -->
+        <button class="slider-nav prev" (click)="previousSlide()" aria-label="Previous slide">
+          <i class="ri-arrow-left-line"></i>
+        </button>
+        <button class="slider-nav next" (click)="nextSlide()" aria-label="Next slide">
+          <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 <!-- Banner Section Start -->
