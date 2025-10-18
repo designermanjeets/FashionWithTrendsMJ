@@ -51,7 +51,7 @@ export class SettingState {
             const customPayments = [
               {
                 name: 'fashionwithtrends_neokred',
-                status: false,
+                status: true,
                 title: 'Pay By UPI INTENT',
               },
               {
