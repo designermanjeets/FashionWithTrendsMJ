@@ -74,7 +74,7 @@ export class SettingState {
               },
               {
                 name: 'fashionwithtrends_neokred2',
-                status: false,
+                status: true,
                 title: 'Pay By UPI INTENT2',
               },
               {
