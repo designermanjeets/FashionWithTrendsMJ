@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Params } from '../../../../../../shared/interface/core.interface';
 
@@ -7,27 +7,42 @@ import { Params } from '../../../../../../shared/interface/core.interface';
   templateUrl: './collection-price-filter.component.html',
   styleUrls: ['./collection-price-filter.component.scss']
 })
-export class CollectionPriceFilterComponent implements OnChanges {
+export class CollectionPriceFilterComponent implements OnInit, OnChanges {
 
   @Input() filter: Params;
 
   public minPrice: number = 0;
-  public maxPrice: number = 1000;
+  public maxPrice: number = 15000;
   public minRange: number = 0;
-  public maxRange: number = 1000;
+  public maxRange: number = 15000;
 
   constructor(private route: ActivatedRoute,
     private router: Router) {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['filter'] && this.filter) {
+  ngOnInit() {
+    // Initialize with default values
+    this.minPrice = this.minRange;
+    this.maxPrice = this.maxRange;
+    
+    // Parse filter if available
+    if (this.filter) {
       this.parsePriceFromFilter();
     }
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['filter'] && this.filter) {
+      this.parsePriceFromFilter();
+    } else if (changes['filter'] && !this.filter) {
+      // Reset to default range when filter is cleared
+      this.minPrice = this.minRange;
+      this.maxPrice = this.maxRange;
+    }
+  }
+
   parsePriceFromFilter() {
-    if (this.filter['price']) {
+    if (this.filter && this.filter['price']) {
       const priceValue = this.filter['price'];
       // Handle multiple price ranges (comma-separated) - take the first one
       const priceRanges = priceValue.split(',');
@@ -48,7 +63,13 @@ export class CollectionPriceFilterComponent implements OnChanges {
         }
       }
     } else {
+      // No filter - use full range
       this.minPrice = this.minRange;
+      this.maxPrice = this.maxRange;
+    }
+    
+    // Ensure maxPrice doesn't exceed maxRange
+    if (this.maxPrice > this.maxRange) {
       this.maxPrice = this.maxRange;
     }
   }
