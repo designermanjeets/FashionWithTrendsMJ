@@ -10,21 +10,24 @@ import { Params } from '../../../../../../shared/interface/core.interface';
 export class CollectionPriceFilterComponent implements OnInit, OnChanges {
 
   @Input() filter: Params;
+  @Input() maxPriceRange: number = 15000;
+  @Input() isLoading: boolean = false;
 
   public minPrice: number = 0;
-  public maxPrice: number = 5000;
+  public maxPrice: number = 15000;
   public minRange: number = 0;
-  public maxRange: number = 5000;
+  public maxRange: number = 15000;
 
   constructor(private route: ActivatedRoute,
     private router: Router) {
   }
 
   ngOnInit() {
-    // Initialize with default values
+    // Initialize with dynamic max range
+    this.maxRange = this.maxPriceRange;
     this.minPrice = this.minRange;
     this.maxPrice = this.maxRange;
-    
+
     // Parse filter if available
     if (this.filter) {
       this.parsePriceFromFilter();
@@ -32,6 +35,11 @@ export class CollectionPriceFilterComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes['maxPriceRange']) {
+      this.maxRange = this.maxPriceRange;
+      this.maxPrice = this.maxRange;
+    }
+
     if (changes['filter'] && this.filter) {
       this.parsePriceFromFilter();
     } else if (changes['filter'] && !this.filter) {
@@ -98,6 +106,7 @@ export class CollectionPriceFilterComponent implements OnInit, OnChanges {
   }
 
   clearFilter() {
+    this.maxRange = this.maxPriceRange;
     this.minPrice = this.minRange;
     this.maxPrice = this.maxRange;
     

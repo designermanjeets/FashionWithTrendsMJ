@@ -19,6 +19,8 @@ export class CollectionSidebarComponent {
 
   @Input() filter: Params;
   @Input() hideFilter: string[];
+  @Input() maxPriceFromProducts: number = 15000;
+  @Input() isPriceFilterLoading: boolean = false;
 
   @Select(AttributeState.attribute) attribute$: Observable<AttributeModel>;
   @Select(BrandState.brand) brand$: Observable<BrandModel>;

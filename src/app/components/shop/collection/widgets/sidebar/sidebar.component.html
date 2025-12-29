@@ -64,7 +64,7 @@
         </h2>
         <div ngbAccordionCollapse>
           <div class="accordion-body" ngbAccordionBody>
-            <app-collection-price-filter [filter]="filter"></app-collection-price-filter>
+            <app-collection-price-filter [filter]="filter" [maxPriceRange]="maxPriceFromProducts" [isLoading]="isPriceFilterLoading"></app-collection-price-filter>
           </div>
         </div>
       </div>

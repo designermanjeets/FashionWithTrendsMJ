@@ -44,6 +44,8 @@ export class CategoryComponent {
   private routerEventsSubscription: Subscription;
 
   public totalItems: number = 0;
+  public maxPriceFromProducts: number = 15000;
+  public isPriceFilterLoading: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private router: Router,

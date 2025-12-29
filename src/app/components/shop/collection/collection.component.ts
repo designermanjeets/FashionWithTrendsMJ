@@ -43,6 +43,8 @@ export class CollectionComponent {
   };
 
   public totalItems: number = 0;
+  public maxPriceFromProducts: number = 15000;
+  public isPriceFilterLoading: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private store: Store) {
