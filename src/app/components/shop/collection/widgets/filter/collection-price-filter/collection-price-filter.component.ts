@@ -1,13 +1,16 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 import { Params } from '../../../../../../shared/interface/core.interface';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-collection-price-filter',
   templateUrl: './collection-price-filter.component.html',
   styleUrls: ['./collection-price-filter.component.scss']
 })
-export class CollectionPriceFilterComponent implements OnInit, OnChanges {
+export class CollectionPriceFilterComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() filter: Params;
   @Input() maxPriceRange: number = 15000;
@@ -17,9 +20,28 @@ export class CollectionPriceFilterComponent implements OnInit, OnChanges {
   public maxPrice: number = 15000;
   public minRange: number = 0;
   public maxRange: number = 15000;
+  
+  private scrollPosition: [number, number] = [0, 0];
+  private shouldPreserveScroll: boolean = false;
+  private navigationSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private viewportScroller: ViewportScroller) {
+    
+    // Subscribe to navigation events to restore scroll position only when price filter changes
+    this.navigationSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        // Restore scroll position only if it was a price filter update
+        if (this.shouldPreserveScroll) {
+          // Use a small delay to ensure it runs after Angular's default scroll behavior
+          setTimeout(() => {
+            this.viewportScroller.scrollToPosition(this.scrollPosition);
+            this.shouldPreserveScroll = false; // Reset flag
+          }, 10);
+        }
+      });
   }
 
   ngOnInit() {
@@ -83,6 +105,10 @@ export class CollectionPriceFilterComponent implements OnInit, OnChanges {
   }
 
   applyFilter() {
+    // Save current scroll position and set flag to preserve it
+    this.scrollPosition = this.viewportScroller.getScrollPosition();
+    this.shouldPreserveScroll = true;
+    
     // Ensure min is not greater than max
     if (this.minPrice > this.maxPrice) {
       [this.minPrice, this.maxPrice] = [this.maxPrice, this.minPrice];
@@ -106,6 +132,10 @@ export class CollectionPriceFilterComponent implements OnInit, OnChanges {
   }
 
   clearFilter() {
+    // Save current scroll position and set flag to preserve it
+    this.scrollPosition = this.viewportScroller.getScrollPosition();
+    this.shouldPreserveScroll = true;
+    
     this.maxRange = this.maxPriceRange;
     this.minPrice = this.minRange;
     this.maxPrice = this.maxRange;
@@ -156,6 +186,13 @@ export class CollectionPriceFilterComponent implements OnInit, OnChanges {
 
   getMaxPercentage(): number {
     return ((this.maxPrice - this.minRange) / (this.maxRange - this.minRange)) * 100;
+  }
+
+  ngOnDestroy() {
+    // Clean up subscription
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
 }
