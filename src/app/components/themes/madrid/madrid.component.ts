@@ -38,11 +38,13 @@ export class MadridComponent implements OnInit, OnDestroy {
   public bannerImages = [
     {
       src: 'assets/images/ftrend1.jpg',
-      alt: 'Fashion Trends Banner 1'
+      alt: 'Fashion Trends Banner 1',
+      link: '/collections?category=winter-collections&sortBy=asc'
     },
     {
       src: 'assets/images/ftrend2.jpg',
-      alt: 'Fashion Trends Banner 2'  
+      alt: 'Fashion Trends Banner 2',
+      link: '/collections?category=winter-collections&sortBy=asc'
     }
   ];
  

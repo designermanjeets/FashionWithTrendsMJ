@@ -9,7 +9,7 @@
       <div class="slider-container">
         <div class="slider-wrapper" [style.transform]="'translateX(' + currentSlide * -100 + '%)'">
           <div class="slide" *ngFor="let image of bannerImages; let i = index">
-            <a href="/collections?sortBy=asc">
+            <a [href]="image.link">
               <img [src]="image.src" [alt]="image.alt" class="img-fluid w-100">
             </a>
           </div>
