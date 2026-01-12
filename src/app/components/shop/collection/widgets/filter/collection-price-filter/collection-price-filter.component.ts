@@ -16,9 +16,9 @@ export class CollectionPriceFilterComponent implements OnInit, OnChanges, OnDest
   @Input() maxPriceRange: number = 15000;
   @Input() isLoading: boolean = false;
 
-  public minPrice: number = 0;
+  public minPrice: number = 300;
   public maxPrice: number = 15000;
-  public minRange: number = 0;
+  public minRange: number = 300;
   public maxRange: number = 15000;
   
   private scrollPosition: [number, number] = [0, 0];
