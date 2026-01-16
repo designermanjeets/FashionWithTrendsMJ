@@ -98,6 +98,7 @@ import { OrderTrackingComponent } from './order-tracking/order-tracking.componen
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { CollectionBrandFilterComponent } from './collection/widgets/filter/collection-brand-filter/collection-brand-filter.component';
 import { BrandState } from '../../shared/state/brand.state';
+import { CollectionSizeFilterComponent } from './collection/widgets/filter/collection-size-filter/collection-size-filter.component';
 import { MyComponentWrapperComponent } from './checkout/my-react-component/MyReactComponentWrapper';
 import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-success.component';
 
@@ -182,6 +183,7 @@ import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-s
     CollectionBrandFilterComponent,
     BrandComponent,
     CategoryComponent,
+    CollectionSizeFilterComponent,
     MyComponentWrapperComponent,
     CheckoutSuccessComponent
   ],
