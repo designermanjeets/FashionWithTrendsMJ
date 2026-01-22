@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Params } from '../../../../../../shared/interface/core.interface';
 
@@ -7,7 +7,7 @@ import { Params } from '../../../../../../shared/interface/core.interface';
   templateUrl: './collection-size-filter.component.html',
   styleUrls: ['./collection-size-filter.component.scss']
 })
-export class CollectionSizeFilterComponent {
+export class CollectionSizeFilterComponent implements OnChanges {
 
   @Input() filter: Params;
 

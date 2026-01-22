@@ -37,7 +37,8 @@ export class CategoryComponent {
     'sort': 'asc', // ASC, DSC
     'sortBy': 'asc',
     'rating': '',
-    'attribute': ''
+    'attribute': '',
+    'size': ''
   };
 
   private queryParamsSubscription: Subscription;
@@ -77,6 +78,7 @@ export class CategoryComponent {
               sortBy: params['sortBy'] ? params['sortBy'] : this.filter['sortBy'],
               rating: params['rating'] ? params['rating'] : '',
               attribute: params['attribute'] ? params['attribute'] : '',
+              size: params['size'] ? params['size'] : '',
             };
             this.store.dispatch(new GetProducts(this.filter));
             return [];
