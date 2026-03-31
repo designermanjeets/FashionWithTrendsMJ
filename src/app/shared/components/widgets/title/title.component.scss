@@ -1,0 +1,12 @@
+/* Keep <h1> in app-title visually consistent with previous <h2> */
+:host h1 {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+@media (max-width: 576px) {
+  :host h1 {
+    font-size: 1.25rem;
+  }
+}

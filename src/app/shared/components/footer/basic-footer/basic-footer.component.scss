@@ -1,0 +1,72 @@
+/* Footer SEO Content Section */
+.footer-seo-content {
+  background-color: #4C3C29;
+  color: #ffffff;
+  padding: 40px 20px 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  .seo-content-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: xx-large;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 18px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: x-large;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    line-height: 1.35;
+
+    a {
+      color: #f0d9a0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #ffecc2;
+      }
+    }
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.88);
+    margin-bottom: 10px;
+  }
+
+  a {
+    color: #f0d9a0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #ffecc2;
+    }
+  }
+
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 16px;
+
+    li {
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 15px;
+      line-height: 1.8;
+      padding-left: 6px;
+    }
+  }
+}

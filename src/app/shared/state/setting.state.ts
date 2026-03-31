@@ -22,7 +22,7 @@ export class SettingStateModel {
 @Injectable()
 export class SettingState {
 
-  constructor(private settingService: SettingService) {}
+  constructor(private settingService: SettingService) { }
 
   @Selector()
   static setting(state: SettingStateModel) {
@@ -35,23 +35,23 @@ export class SettingState {
   }
 
   @Action(GetSettingOption)
-  getSettingOptions(ctx: StateContext<SettingStateModel>) { 
+  getSettingOptions(ctx: StateContext<SettingStateModel>) {
     return this.settingService.getSettingOption().pipe(
       tap({
         next: (result) => {
           let customValue;
           const state = ctx.getState();
-         
-          if(!state.selectedCurrency && result?.values?.general){
+
+          if (!state.selectedCurrency && result?.values?.general) {
             state.selectedCurrency = result?.values?.general.default_currency;
           }
 
-          if(result.values?.payment_methods?.length) {
+          if (result.values?.payment_methods?.length) {
             customValue = JSON.parse(JSON.stringify(result.values));
             const customPayments = [
               {
                 name: 'fashionwithtrends_neokred',
-                status: true,
+                status: false,
                 title: 'Pay By UPI INTENT',
               },
               {
@@ -68,13 +68,13 @@ export class SettingState {
               },
               {
                 name: 'zyaada_pay',
-                status: true,
+                status: false,
                 title: 'Cash Free',
                 icon: './assets/images/cash_free.jpg',
               },
               {
                 name: 'fashionwithtrends_neokred2',
-                status: true,
+                status: false,
                 title: 'Pay By UPI INTENT2',
               },
               {
@@ -84,12 +84,12 @@ export class SettingState {
                 icon: './assets/images/sub_paisa.png'
               },
             ];
-             customValue.general.site_name = "Fashion with Trends"
+            customValue.general.site_name = "Fashion with Trends"
             customValue.payment_methods = customPayments //[result.values.payment_methods[0]];
           }
           ctx.patchState({
-          ...state,
-          setting: customValue,
+            ...state,
+            setting: customValue,
           });
         },
         error: (err) => {
@@ -100,12 +100,12 @@ export class SettingState {
   }
 
   @Action(SelectedCurrency)
-  selectedCurrency(ctx: StateContext<SettingStateModel>, action: SelectedCurrency){
+  selectedCurrency(ctx: StateContext<SettingStateModel>, action: SelectedCurrency) {
     const state = ctx.getState();
     ctx.patchState({
       ...state,
       selectedCurrency: action.payload
     });
   }
-  
+
 }

@@ -4,58 +4,58 @@
 
             <div class="col-xl-3 col-lg-2 col-sm-3">
                 <app-footer-logo [data]="data" [footer]="footer"></app-footer-logo>
-                <h4 class="pr-3 mt-3 text-white"> Bringing you the latest in trendy and stylish clothing. Shop the best fashion picks and elevate your wardrobe with confidence. Stay trendy, stay stylish!</h4>
+                <h4 class="pr-3 mt-3 text-white"> Bringing you the latest in trendy and stylish clothing. Shop the best
+                    fashion picks and elevate your wardrobe with confidence. Stay trendy, stay stylish!</h4>
             </div>
-            <div class="col-xl-2 col-lg-2 col-sm-3"
-            (click)="toggle('useful_link')">
-            <div class="footer-title" [class.show]="active['useful_link']">
-                <h4>{{ 'Useful Links' | translate }}</h4>
+            <div class="col-xl-2 col-lg-2 col-sm-3" (click)="toggle('useful_link')">
+                <div class="footer-title" [class.show]="active['useful_link']">
+                    <h4>{{ 'Useful Links' | translate }}</h4>
+                </div>
+                <div class="footer-contain">
+                    <!-- <app-footer-links [links]="data?.footer?.useful_link || []"></app-footer-links> -->
+                    <ul>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/term-condition">Terms and Conditions</a></li>
+                        <li><a href="/shipping-delivery">Shipping + delivery</a></li>
+                        <li><a href="/Refund-and-Cancellation-Policy">Refund and Cancellation Policy</a></li>
+                        <li><a href="/return-exchange">Return + Exchange</a></li>
+                        <li><a href="/page/about-us">About Us</a></li>
+                        <li><a href="/Contact-Us">Contact Us</a></li>
+                    </ul>
+                    <!-- No Data -->
+                    <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'"
+                        *ngIf="!data?.footer?.useful_link?.length"></app-no-data>
+                </div>
             </div>
-            <div class="footer-contain">
-                <!-- <app-footer-links [links]="data?.footer?.useful_link || []"></app-footer-links> -->
-                 <ul>
-                    <li><a href="/privacy-policy">Privacy Policy</a></li>
-                    <li><a href="/term-condition">Terms and Conditions</a></li>
-                    <li><a href="/shipping-delivery">Shipping + delivery</a></li>
-                    <li><a href="/Refund-and-Cancellation-Policy">Refund and Cancellation Policy</a></li>
-                    <li><a href="/return-exchange">Return + Exchange</a></li>
-                    <li><a href="/page/about-us">About Us</a></li>
-                    <li><a href="/Contact-Us">Contact Us</a></li>
-                 </ul>
-                <!-- No Data -->
-                <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'" *ngIf="!data?.footer?.useful_link?.length"></app-no-data>
+            <div class="col-xl-2 col-sm-3" (click)="toggle('help_center')">
+                <div class="footer-title" [class.show]="active['help_center']">
+                    <h4>{{ 'Help Center' | translate }}</h4>
+                </div>
+                <div class="footer-contain">
+                    <app-footer-links [links]="data?.footer?.help_center || []"></app-footer-links>
+                    <!-- No Data -->
+                    <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'"
+                        *ngIf="!data?.footer?.help_center?.length"></app-no-data>
+                </div>
             </div>
-        </div>
-        <div class="col-xl-2 col-sm-3"
-            (click)="toggle('help_center')">
-            <div class="footer-title" [class.show]="active['help_center']">
-                <h4>{{ 'Help Center' | translate }}</h4>
-            </div>
-            <div class="footer-contain">
-                <app-footer-links [links]="data?.footer?.help_center || []"></app-footer-links>
-                <!-- No Data -->
-                <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'" *ngIf="!data?.footer?.help_center?.length"></app-no-data>
-            </div>
-        </div>
-       
-        <div class="col-xl-5 col-lg-4 col-sm-6">
-            <div class="footer-logo">
-                <!-- <app-footer-logo [data]="data" [footer]="footer"></app-footer-logo> -->
-                <app-footer-about [data]="data"></app-footer-about>
-                <div class="col-xl-12 col-lg-4 col-sm-6"
-                *ngIf="data?.footer?.support_email ||
+
+            <div class="col-xl-5 col-lg-4 col-sm-6">
+                <div class="footer-logo">
+                    <!-- <app-footer-logo [data]="data" [footer]="footer"></app-footer-logo> -->
+                    <app-footer-about [data]="data"></app-footer-about>
+                    <div class="col-xl-12 col-lg-4 col-sm-6" *ngIf="data?.footer?.support_email ||
                     data?.footer?.support_number ||
                     data?.footer?.play_store_url ||
                     data?.footer?.app_store_url">
-                <app-footer-contact [data]="data"></app-footer-contact>
+                        <app-footer-contact [data]="data"></app-footer-contact>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
 
-            
-            
-          
-          
+
+
+
+
         </div>
     </div>
     <div class="sub-footer section-small-space">
@@ -66,5 +66,75 @@
             <app-footer-payment-options></app-footer-payment-options>
         </div> -->
         <app-footer-social-links [data]="data" *ngIf="data?.footer?.social_media_enable"></app-footer-social-links>
+    </div>
+
+
+    <!-- Footer SEO Content -->
+    <div class="footer-seo-content">
+        <div class="seo-content-inner">
+            <h2>Explore Modern Men's &amp; Women's Clothing at Fashion With Trends</h2>
+            <p>Fashion With Trends is an online destination for people who enjoy modern, comfortable, and stylish
+                clothing. Our store focuses on providing trendy outfits for both men and women who want fashion that
+                fits into their daily lives. From relaxed casual wear to sporty styles, our clothing collections are
+                designed to combine comfort, confidence, and contemporary fashion.</p>
+            <p>We believe that great fashion should be easy to wear and accessible to everyone. That's why our <a
+                    href="https://fashionwithtrends.com/collections" target="_blank" rel="noopener">clothing
+                    collections</a> are created with practical designs, comfortable fabrics, and modern styles that suit
+                everyday lifestyles. Whether you are updating your wardrobe or looking for something new to wear,
+                Fashion With Trends offers clothing that helps you look stylish while staying comfortable.</p>
+
+            <h3><a href="https://fashionwithtrends.com/collections?category=women" target="_blank"
+                    rel="noopener">Stylish Women's Clothing for Everyday Fashion</a></h3>
+            <p>Our women's clothing collection is designed for modern women who want outfits that are both fashionable
+                and comfortable. At Fashion With Trends, you can explore a variety of stylish tops, trendy co-ord sets,
+                casual t-shirts, and versatile everyday outfits that can easily fit into different occasions.</p>
+            <p>Whether you're planning a casual outing, heading to work, or simply looking for comfortable clothing for
+                everyday wear, our women's collection offers practical fashion choices that help you create effortless
+                and stylish looks.</p>
+
+            <h3><a href="https://fashionwithtrends.com/collections?category=men" target="_blank" rel="noopener">Modern
+                    Men's Clothing for Comfort and Style</a></h3>
+            <p>Fashion With Trends also offers a growing range of men's clothing designed for everyday comfort and
+                modern style. Our collection includes casual t-shirts, oversized t-shirts, relaxed shirts, and versatile
+                outfits that are perfect for daily wear.</p>
+            <p>Each clothing piece is selected to provide a balance of comfort, durability, and style. The goal is to
+                help men build a wardrobe that feels comfortable while still reflecting current fashion trends.</p>
+
+            <h3><a href="https://fashionwithtrends.com/collections?category=%20activewear" target="_blank"
+                    rel="noopener">Sports Fashion Designed for Active Lifestyles</a></h3>
+            <p>For those who enjoy an active lifestyle, Fashion With Trends also features sports-inspired clothing that
+                blends comfort with a modern athletic look. Our sports fashion pieces are designed to support movement
+                and flexibility while maintaining a stylish appearance.</p>
+            <p>These outfits are perfect for workouts, outdoor activities, or relaxed casual wear. With breathable
+                fabrics and comfortable fits, sports fashion allows you to stay active without compromising on style.
+            </p>
+
+            <h3>Comfortable Clothing for Everyday Wear</h3>
+            <p>Great style should always come with lasting comfort. At Fashion With Trends, our collections focus on
+                fabrics and designs that support comfort throughout the day. From lightweight materials to relaxed fits,
+                each piece is chosen to provide a comfortable wearing experience.</p>
+            <p>Whether you're spending a busy day outside or relaxing at home, our clothing is designed to keep you
+                comfortable while maintaining a stylish look.</p>
+
+            <h3>Why Choose Fashion With Trends?</h3>
+            <ul class="check-list">
+                <li>&#10004; Trendy clothing for men and women</li>
+                <li>&#10004; Comfortable outfits designed for daily wear</li>
+                <li>&#10004; Modern styles inspired by current fashion trends</li>
+                <li>&#10004; Sports fashion for active lifestyles</li>
+                <li>&#10004; New clothing styles added regularly</li>
+                <li>&#10004; Simple and convenient online shopping experience</li>
+            </ul>
+            <p>Fashion With Trends aims to make fashion simple, stylish, and comfortable for everyone.</p>
+
+            <h3>Discover the Latest Clothing Trends Online</h3>
+            <p>If you enjoy modern fashion that fits into everyday life, Fashion With Trends offers a variety of
+                clothing options to explore. Our collections are updated regularly so customers can discover fresh
+                styles that match current fashion preferences.</p>
+            <p>From casual outfits to sports-inspired clothing, Fashion With Trends helps you build a wardrobe that
+                feels comfortable, stylish, and suitable for modern living.</p>
+            <p>Start exploring today and discover clothing designed to support both style and comfort at <a
+                    href="https://fashionwithtrends.com/" target="_blank" rel="noopener">Fashion With Trends</a>.</p>
+        </div>
     </div>
 </div>

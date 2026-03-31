@@ -10,7 +10,14 @@
         <div class="slider-wrapper" [style.transform]="'translateX(' + currentSlide * -100 + '%)'">
           <div class="slide" *ngFor="let image of bannerImages; let i = index">
             <a [href]="image.link">
-              <img [src]="image.src" [alt]="image.alt" class="img-fluid w-100">
+              <img
+                [src]="image.src"
+                [alt]="image.alt"
+                class="img-fluid w-100"
+                width="1600"
+                height="500"
+                [attr.fetchpriority]="i === 0 ? 'high' : null"
+                [attr.loading]="i === 0 ? 'eager' : 'lazy'">
             </a>
           </div>
         </div>
@@ -56,11 +63,14 @@
 <section class="category-section-3" *ngIf="data?.content?.categories_image_list?.status">
   <div class="container-fluid-lg">
     <app-title
-      [title]="data?.content?.categories_image_list?.title"
-      [style]="'simple'">
+      title="Shop Trendy Fashion for Men, Women & Sportswear"
+      [style]="'simple'"
+      [asH1]="true">
     </app-title>
     <p class="text-center p-text-main">
-      Fashion with Trends serves all your curated-fashion needs including men's, women's, and sportswear categories. Trendy designs blended with something basic for a modern wardrobe without any guesswork. Shop freely. Style is easy. 
+      Discover the latest styles in men’s, women’s, and sportswear, thoughtfully curated for your everyday wardrobe.
+  Trendy designs blended with timeless basics to keep your style effortless and versatile.
+Shop with ease and redefine fashion your way - simple, modern, and made for you.
     </p>
     <app-theme-categories
       [style]="'horizontal'"

@@ -1,3 +1,26 @@
 User-agent: *
+
+# Allow crawling by default
+Allow: /
+
+# Block private/user-specific areas
+Disallow: /account/
+Disallow: /auth/
+
+# Block transactional flows (avoid thin/duplicate URLs in index)
+Disallow: /cart
+Disallow: /cart/
+Disallow: /checkout
+Disallow: /checkout/
+Disallow: /order/
+Disallow: /wishlist
+Disallow: /wishlist/
+Disallow: /compare
+Disallow: /compare/
+
+# Block internal utility paths
 Disallow: /no-index/
-Sitemap: https://www.https://fashionwithtrends.com/sitemap.xml
+Disallow: /rubbermaid-fasttrack/
+
+# Keep sitemap discoverable
+Sitemap: https://fashionwithtrends.com/sitemap.xml

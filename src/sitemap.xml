@@ -7,13 +7,13 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://fashionwithtrends.com/about-us</loc>
+    <loc>https://fashionwithtrends.com/page/about-us</loc>
     <lastmod>2026-02-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fashionwithtrends.com/contact-us</loc>
+    <loc>https://fashionwithtrends.com/Contact-Us</loc>
     <lastmod>2026-02-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -49,40 +49,16 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fashionwithtrends.com/faq</loc>
-    <lastmod>2026-02-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://fashionwithtrends.com/offers</loc>
     <lastmod>2026-02-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fashionwithtrends.com/order/tracking</loc>
-    <lastmod>2026-02-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://fashionwithtrends.com/collections</loc>
     <lastmod>2026-02-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://fashionwithtrends.com/account</loc>
-    <lastmod>2026-02-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://fashionwithtrends.com/auth/login</loc>
-    <lastmod>2026-02-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://fashionwithtrends.com/product/men-solid-sports-track-pants</loc>
