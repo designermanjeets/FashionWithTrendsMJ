@@ -39,12 +39,12 @@ export class MadridComponent implements OnInit, OnDestroy {
     {
       src: 'assets/images/1.png',
       alt: 'Fashion Trends Banner 1',
-      link: '/collections?category=winter-collections&sortBy=asc'
+      link: '/collections?category=women'
     },
     {
       src: 'assets/images/5.png',
       alt: 'Fashion Trends Banner 2',
-      link: '/collections?category=winter-collections&sortBy=asc'
+      link: '/collections?category=men&sortBy=asc'
     }
   ];
  
