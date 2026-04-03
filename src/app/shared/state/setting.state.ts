@@ -62,13 +62,13 @@ export class SettingState {
               },
               {
                 name: 'cash_free',
-                status: true,
+                status: false,
                 title: 'Cash Free',
                 icon: './assets/images/cash_free.jpg',
               },
               {
                 name: 'zyaada_pay',
-                status: false,
+                status: true,
                 title: 'Cash Free',
                 icon: './assets/images/cash_free.jpg',
               },
