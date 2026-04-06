@@ -53,8 +53,12 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          // this.notificationService.notification = false;
-          this.store.dispatch(new AuthClear());
+          // Only clear auth state if the user actually had a session.
+          // For guests, a 401 from a public endpoint must NOT wipe the cart.
+          const hasToken = this.store.selectSnapshot(state => state.auth && state.auth.access_token);
+          if (hasToken) {
+            this.store.dispatch(new AuthClear());
+          }
         }
         return throwError(() => error);
       })

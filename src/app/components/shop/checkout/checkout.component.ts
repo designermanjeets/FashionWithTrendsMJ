@@ -10,7 +10,9 @@ import { AccountState } from '../../../shared/state/account.state';
 import { CartState } from '../../../shared/state/cart.state';
 import { OrderState } from '../../../shared/state/order.state';
 import { Checkout, PlaceOrder } from '../../../shared/action/order.action';
-import { ClearCart } from '../../../shared/action/cart.action';
+import { ClearCart, SyncCart, GetCartItems } from '../../../shared/action/cart.action';
+import { Register } from '../../../shared/action/auth.action';
+import { GetUserDetails } from '../../../shared/action/account.action';
 import { AddressModalComponent } from '../../../shared/components/widgets/modal/address-modal/address-modal.component';
 import { Cart } from '../../../shared/interface/cart.interface';
 import { SettingState } from '../../../shared/state/setting.state';
@@ -47,6 +49,7 @@ export class CheckoutComponent {
   @Select(AccountState.user) user$: Observable<AccountUser>;
   @Select(AuthState.accessToken) accessToken$: Observable<string>;
   @Select(CartState.cartItems) cartItem$: Observable<Cart[]>;
+  @Select(CartState.cartTotal) cartTotal$: Observable<number>;
   @Select(OrderState.checkout) checkout$: Observable<OrderCheckout>;
   @Select(SettingState.setting) setting$: Observable<Values>;
   @Select(CartState.cartHasDigital) cartDigital$: Observable<boolean | number>;
@@ -238,7 +241,7 @@ export class CheckoutComponent {
       }
     });
     
-    this.localUserCheck = JSON.parse(localStorage.getItem('account') || '');
+    this.localUserCheck = JSON.parse(localStorage.getItem('account') || 'null');
     
   }
 
@@ -1168,9 +1171,67 @@ export class CheckoutComponent {
     this.store.dispatch(new ClearCart());
   }
 
+  registerAndContinue() {
+    const nameCtrl = this.form.get('name');
+    const emailCtrl = this.form.get('email');
+    const phoneCtrl = this.form.get('phone');
+    const countryCodeCtrl = this.form.get('country_code');
+    const passwordCtrl = this.form.get('password');
+
+    nameCtrl?.markAsTouched();
+    emailCtrl?.markAsTouched();
+    phoneCtrl?.markAsTouched();
+
+    if (!nameCtrl || !emailCtrl || !phoneCtrl || !nameCtrl.value || emailCtrl.invalid || !phoneCtrl.value) {
+      this.notificationService.showError('Please fill name, valid email and phone.');
+      return;
+    }
+
+    const generatedPassword = passwordCtrl?.value || (Math.random().toString(36).slice(-8) + 'A1!');
+
+    const payload: any = {
+      name: nameCtrl.value,
+      email: emailCtrl.value,
+      phone: Number(phoneCtrl.value),
+      country_code: Number(countryCodeCtrl?.value || 91),
+      password: generatedPassword,
+      password_confirmation: generatedPassword,
+    };
+
+    // Snapshot cart items to sync to the server after registration
+    const cartItems = this.store.selectSnapshot(state => state.cart && state.cart.items) || [];
+    const syncPayload = cartItems.map((item: Cart) => ({
+      product_id: item.product_id,
+      variation_id: item.variation_id,
+      quantity: item.quantity,
+    }));
+
+    this.loading = true;
+    this.store.dispatch(new Register(payload)).subscribe({
+      next: () => {
+        // Pull fresh user details, sync guest cart to server, then stay on checkout
+        this.store.dispatch(new GetUserDetails());
+        if (syncPayload.length) {
+          this.store.dispatch(new SyncCart(syncPayload));
+        } else {
+          this.store.dispatch(new GetCartItems());
+        }
+        this.loading = false;
+        // Reload the checkout page so the authenticated UI (addresses, payment) renders
+        setTimeout(() => { window.location.reload(); }, 300);
+      },
+      error: (err) => {
+        this.loading = false;
+        this.notificationService.showError(err?.message || 'Registration failed.');
+      }
+    });
+  }
+
+  goToLogin() {
+    this.router.navigate(['/auth/login']);
+  }
+
   ngOnDestroy() {
-    // this.store.dispatch(new Clear());
-    this.store.dispatch(new ClearCart());
     this.form.reset();
     this.pollingSubscription && this.pollingSubscription.unsubscribe();
   }

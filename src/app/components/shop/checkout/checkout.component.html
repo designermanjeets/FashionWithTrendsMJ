@@ -72,6 +72,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mt-2">
+                                        <button type="button"
+                                            class="btn theme-bg-color text-white fw-bold"
+                                            (click)="registerAndContinue()">
+                                            {{ 'Register' | translate }}
+                                        </button>
+                                        <div>
+                                            <span class="me-2">{{ 'Already have an account?' | translate }}</span>
+                                            <a href="javascript:void(0)" class="fw-bold text-decoration-underline" (click)="goToLogin()">
+                                                {{ 'Login' | translate }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="checkbox-main-box">
@@ -410,19 +425,19 @@
                                         <li>
                                             <h4>{{ 'Subtotal' | translate }}</h4>
                                             <h4 class="price">
-                                                {{ (checkoutTotal ? (checkoutTotal.total.sub_total | currencySymbol) : 'Not Calculated Yet' | translate ) }}
+                                                {{ (checkoutTotal ? checkoutTotal.total.sub_total : ((cartTotal$ | async) || 0)) | currencySymbol }}
                                             </h4>
                                         </li>
                                         <li *ngIf="!(cartDigital$ | async)">
                                             <h4>{{ 'Shipping' | translate }}</h4>
                                             <h4 class="price">
-                                                {{ (checkoutTotal ? (checkoutTotal.total.shipping_total | currencySymbol) : 'Not Calculated Yet' | translate) }}
+                                                {{ (checkoutTotal ? checkoutTotal.total.shipping_total : 0) | currencySymbol }}
                                             </h4>
                                         </li>
                                         <li>
                                             <h4>{{ 'Tax' | translate  }}</h4>
                                             <h4 class="price">
-                                                {{ (checkoutTotal ? (checkoutTotal.total.tax_total | currencySymbol) : 'Not Calculated Yet' | translate ) }}
+                                                {{ (checkoutTotal ? checkoutTotal.total.tax_total : 0) | currencySymbol }}
                                             </h4>
                                         </li>
                                         <li *ngIf="(user$ | async) && checkoutTotal && (user$ | async)?.point?.balance">
@@ -486,7 +501,7 @@
                                         <li class="list-total">
                                             <h4>{{ 'Total' | translate }}</h4>
                                             <h4 class="price">
-                                                {{ (checkoutTotal ? (checkoutTotal.total.total | currencySymbol) : 'Not Calculated Yet' | translate ) }}
+                                                {{ (checkoutTotal ? checkoutTotal.total.total : ((cartTotal$ | async) || 0)) | currencySymbol }}
                                             </h4>
                                         </li>
                                     </ul>
