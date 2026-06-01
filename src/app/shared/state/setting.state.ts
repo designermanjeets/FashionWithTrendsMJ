@@ -83,6 +83,13 @@ export class SettingState {
                 title: 'Sab Paisa',
                 icon: './assets/images/sub_paisa.png'
               },
+              {
+                name: 'suraj_airpay',
+                status: true,
+                title: 'Airpay',
+                icon: './assets/images/airpay.png',
+                parameter: 'suraj_airpay',
+              },
             ];
             customValue.general.site_name = "Fashion with Trends"
             customValue.payment_methods = customPayments //[result.values.payment_methods[0]];

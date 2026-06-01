@@ -151,6 +151,26 @@ export class CartService {
     });
   }
 
+  initiateAirpayIntent(data: any): Observable<any> {
+    return new Observable(observer => {
+      fetch(`${environment.URL}/suraj_airpay-initiate-payment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          observer.next(data);
+          observer.complete();
+        })
+        .catch(error => {
+          observer.error(error);
+        });
+    });
+  }
+
   initiateZyaadaPayIntent(data: any): Observable<any> {
     return new Observable(observer => {
       fetch(`${environment.URL}/zyaadapaisa-initiate-payment`,{

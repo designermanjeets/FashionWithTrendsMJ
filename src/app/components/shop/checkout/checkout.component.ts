@@ -317,6 +317,9 @@ export class CheckoutComponent {
       case 'fashionwithtrends_neokred2':
         this.checkout(value);
         break;
+      case 'suraj_airpay':
+        this.checkout(value);
+        break;
       default:
         break;
     }
@@ -764,6 +767,61 @@ export class CheckoutComponent {
     });
   }
 
+  // Airpay Payment Integration
+  initiateAirpayPaymentIntent(payment_method: string) {
+    const uuid = uuidv4();
+    const userData = localStorage.getItem('account');
+    const parsedUserData = JSON.parse(userData || '{}')?.user || {};
+
+    const payload = {
+      uuid,
+      ...parsedUserData,
+      checkout: this.storeData?.order?.checkout
+    };
+
+    this.cartService.initiateAirpayIntent({
+      uuid: payload.uuid,
+      email: payload.email,
+      total: this.checkoutTotal?.total?.total,
+      phone: parsedUserData.phone,
+      name: parsedUserData.name,
+      address: `${parsedUserData.address?.[0]?.city || ''} ${parsedUserData.address?.[0]?.area || ''}`
+    }).subscribe({
+      next: (response) => {
+        if (response?.R && response?.data) {
+          try {
+            const airpayData = response.data;
+            console.log(airpayData);
+
+            if (airpayData?.payment_url) {
+              const paymentWindow = window.open(
+                airpayData.payment_url,
+                'AirpayPaymentWindow',
+                'width=600,height=700,left=100,top=100,resizable=yes,scrollbars=yes'
+              );
+
+              if (!paymentWindow) {
+                console.error("Popup blocked. Please allow pop-ups for this site.");
+              } else {
+                let action = new PlaceOrder(this.form.value);
+                this.checkTransactionStatusZyaadaPay(uuid, action.payload, paymentWindow, payment_method);
+              }
+            } else {
+              console.error("Invalid response: Payment link is missing.");
+            }
+          } catch (error) {
+            console.error("Error parsing Airpay response:", error);
+          }
+        } else {
+          console.error("Airpay payment initiation failed:", response?.msg);
+        }
+      },
+      error: (err) => {
+        console.log("Error initiating Airpay payment:", err);
+      }
+    });
+  }
+
   checkTransactionStatusZyaadaPay(uuid: any, action: any, paymentWindow: Window | null, payment_method: string) {
     if (!paymentWindow) return;
 
@@ -1120,6 +1178,9 @@ export class CheckoutComponent {
       }
       if(this.payment_method === 'zyaada_pay') {
         this.initiateZyaadaPayPaymentIntent(this.payment_method);
+      }
+      if(this.payment_method === 'suraj_airpay') {
+        this.initiateAirpayPaymentIntent(this.payment_method);
       }
       if(this.payment_method === 'fashionwithtrends_neokred') {
         this.orderService.placeOrder(action?.payload).pipe(
