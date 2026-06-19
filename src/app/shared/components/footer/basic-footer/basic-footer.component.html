@@ -14,13 +14,13 @@
                 <div class="footer-contain">
                     <!-- <app-footer-links [links]="data?.footer?.useful_link || []"></app-footer-links> -->
                     <ul>
-                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                        <li><a href="/term-condition">Terms and Conditions</a></li>
-                        <li><a href="/shipping-delivery">Shipping + delivery</a></li>
-                        <li><a href="/Refund-and-Cancellation-Policy">Refund and Cancellation Policy</a></li>
-                        <li><a href="/return-exchange">Return + Exchange</a></li>
-                        <li><a href="/page/about-us">About Us</a></li>
-                        <li><a href="/Contact-Us">Contact Us</a></li>
+                        <li><a [routerLink]="['/privacy-policy']">Privacy Policy</a></li>
+                        <li><a [routerLink]="['/term-condition']">Terms and Conditions</a></li>
+                        <li><a [routerLink]="['/shipping-delivery']">Shipping + delivery</a></li>
+                        <li><a [routerLink]="['/Refund-and-Cancellation-Policy']">Refund and Cancellation Policy</a></li>
+                        <li><a [routerLink]="['/return-exchange']">Return + Exchange</a></li>
+                        <li><a [routerLink]="['/page/about-us']">About Us</a></li>
+                        <li><a [routerLink]="['/Contact-Us']">Contact Us</a></li>
                     </ul>
                     <!-- No Data -->
                     <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'"
@@ -78,13 +78,12 @@
                 fits into their daily lives. From relaxed casual wear to sporty styles, our clothing collections are
                 designed to combine comfort, confidence, and contemporary fashion.</p>
             <p>We believe that great fashion should be easy to wear and accessible to everyone. That's why our <a
-                    href="https://fashionwithtrends.com/collections" target="_blank" rel="noopener">clothing
+                    [routerLink]="['/collections']">clothing
                     collections</a> are created with practical designs, comfortable fabrics, and modern styles that suit
                 everyday lifestyles. Whether you are updating your wardrobe or looking for something new to wear,
                 Fashion With Trends offers clothing that helps you look stylish while staying comfortable.</p>
 
-            <h3><a href="https://fashionwithtrends.com/collections?category=women" target="_blank"
-                    rel="noopener">Stylish Women's Clothing for Everyday Fashion</a></h3>
+            <h3><a [routerLink]="['/collections']" [queryParams]="{category: 'women'}">Stylish Women's Clothing for Everyday Fashion</a></h3>
             <p>Our women's clothing collection is designed for modern women who want outfits that are both fashionable
                 and comfortable. At Fashion With Trends, you can explore a variety of stylish tops, trendy co-ord sets,
                 casual t-shirts, and versatile everyday outfits that can easily fit into different occasions.</p>
@@ -92,7 +91,7 @@
                 everyday wear, our women's collection offers practical fashion choices that help you create effortless
                 and stylish looks.</p>
 
-            <h3><a href="https://fashionwithtrends.com/collections?category=men" target="_blank" rel="noopener">Modern
+            <h3><a [routerLink]="['/collections']" [queryParams]="{category: 'men'}">Modern
                     Men's Clothing for Comfort and Style</a></h3>
             <p>Fashion With Trends also offers a growing range of men's clothing designed for everyday comfort and
                 modern style. Our collection includes casual t-shirts, oversized t-shirts, relaxed shirts, and versatile
@@ -100,8 +99,7 @@
             <p>Each clothing piece is selected to provide a balance of comfort, durability, and style. The goal is to
                 help men build a wardrobe that feels comfortable while still reflecting current fashion trends.</p>
 
-            <h3><a href="https://fashionwithtrends.com/collections?category=%20activewear" target="_blank"
-                    rel="noopener">Sports Fashion Designed for Active Lifestyles</a></h3>
+            <h3><a [routerLink]="['/collections']" [queryParams]="{category: 'activewear'}">Sports Fashion Designed for Active Lifestyles</a></h3>
             <p>For those who enjoy an active lifestyle, Fashion With Trends also features sports-inspired clothing that
                 blends comfort with a modern athletic look. Our sports fashion pieces are designed to support movement
                 and flexibility while maintaining a stylish appearance.</p>
@@ -134,7 +132,7 @@
             <p>From casual outfits to sports-inspired clothing, Fashion With Trends helps you build a wardrobe that
                 feels comfortable, stylish, and suitable for modern living.</p>
             <p>Start exploring today and discover clothing designed to support both style and comfort at <a
-                    href="https://fashionwithtrends.com/" target="_blank" rel="noopener">Fashion With Trends</a>.</p>
+                    [routerLink]="['/']">Fashion With Trends</a>.</p>
         </div>
     </div>
 </div>
