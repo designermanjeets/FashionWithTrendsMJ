@@ -224,21 +224,43 @@ export class CheckoutComponent {
     });
 
     this.form.controls['phone']?.valueChanges.subscribe((value) => {
-      if(value && value.toString().length > 10) {
-        this.form.controls['phone']?.setValue(+value.toString().slice(0, 10));
+      if (value != null) {
+        const cleaned = value.toString().replace(/\D/g, '').slice(0, 10);
+        if (cleaned !== value.toString()) {
+          this.form.controls['phone']?.setValue(cleaned, { emitEvent: false });
+        }
       }
     });
 
     this.form.get('shipping_address.phone')?.valueChanges.subscribe((value) => {
-      if(value && value.toString().length > 10) {
-        this.form.get('shipping_address.phone')?.setValue(+value.toString().slice(0, 10));
+      if (value != null) {
+        const cleaned = value.toString().replace(/\D/g, '').slice(0, 10);
+        if (cleaned !== value.toString()) {
+          this.form.get('shipping_address.phone')?.setValue(cleaned, { emitEvent: false });
+        }
       }
     });
 
     this.form.get('billing_address.phone')?.valueChanges.subscribe((value) => {
-      if(value && value.toString().length > 10) {
-        this.form.get('billing_address.phone')?.setValue(+value.toString().slice(0, 10));
+      if (value != null) {
+        const cleaned = value.toString().replace(/\D/g, '').slice(0, 10);
+        if (cleaned !== value.toString()) {
+          this.form.get('billing_address.phone')?.setValue(cleaned, { emitEvent: false });
+        }
       }
+    });
+
+    [
+      this.form.controls['name'],
+      this.form.get('shipping_address.title'),
+      this.form.get('billing_address.title'),
+    ].forEach(control => {
+      control?.valueChanges.subscribe(value => {
+        if (value) {
+          const cleaned = value.replace(/[^a-zA-Z\s]/g, '');
+          if (cleaned !== value) control.setValue(cleaned, { emitEvent: false });
+        }
+      });
     });
     
     this.localUserCheck = JSON.parse(localStorage.getItem('account') || 'null');
@@ -1290,6 +1312,14 @@ export class CheckoutComponent {
 
   goToLogin() {
     this.router.navigate(['/auth/login']);
+  }
+
+  onlyAlphaKey(event: KeyboardEvent): boolean {
+    return /^[a-zA-Z ]$/.test(event.key);
+  }
+
+  onlyNumericKey(event: KeyboardEvent): boolean {
+    return /^[0-9]$/.test(event.key);
   }
 
   ngOnDestroy() {

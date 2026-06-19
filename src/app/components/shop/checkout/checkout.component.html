@@ -14,7 +14,7 @@
                                 <div class="col-md-4">
                                     <div class="mb-3 form-box">
                                         <label for="name" class="form-label">{{ 'Name' | translate }}</label>
-                                        <input type="text" class="form-control" formControlName="name" placeholder="{{ 'Enter Name' | translate }}" id="name">
+                                        <input type="text" class="form-control" formControlName="name" placeholder="{{ 'Enter Name' | translate }}" id="name" autocomplete="off" (keypress)="onlyAlphaKey($event)">
                                         <div class="invalid-feedback"
                                             *ngIf="form?.controls?.['name']?.touched && form.controls['name']?.errors?.['required']">
                                             {{ 'Name Is Required' | translate }}
@@ -24,7 +24,7 @@
                                 <div class="col-md-4">
                                     <div class="mb-3 form-box">
                                         <label for="email" class="form-label">{{ 'Email' | translate }}</label>
-                                        <input type="email" class="form-control" placeholder="{{ 'Enter Email Address' | translate }}" formControlName="email" id="email">
+                                        <input type="email" class="form-control" placeholder="{{ 'Enter Email Address' | translate }}" formControlName="email" id="email" autocomplete="off">
                                         <div class="invalid-feedback"
                                             *ngIf="form?.controls?.['email']?.touched && form.controls['email']?.errors?.['required']">
                                             {{ 'Email is Required' | translate }}
@@ -48,8 +48,8 @@
                                           </div>
                                         </ng-template>
                                       </select2>
-                                      <input type="number" class="form-control intl-input-padding" formControlName="phone"
-                                        placeholder="{{ 'enter_phone' | translate }}" name="phone">
+                                      <input type="tel" class="form-control intl-input-padding" formControlName="phone"
+                                        placeholder="{{ 'enter_phone' | translate }}" name="phone" inputmode="numeric" maxlength="10" autocomplete="off" (keypress)="onlyNumericKey($event)">
                                     </div>
                                     <div class="invalid-feedback"
                                         *ngIf="form?.controls?.['phone']?.touched && form.controls['phone']?.errors?.['required']">
@@ -98,7 +98,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3 form-box">
                                             <label for="sname" class="form-label">{{ 'Title' | translate }}</label>
-                                            <input type="text" class="form-control" formControlName="title" id="sname" placeholder="{{ 'Enter Name' | translate }}">
+                                            <input type="text" class="form-control" formControlName="title" id="sname" placeholder="{{ 'Enter Name' | translate }}" autocomplete="off" (keypress)="onlyAlphaKey($event)">
                                             <div *ngIf="form.get('shipping_address.title')?.touched && form.get('shipping_address.title')?.errors?.['required']" class="invalid-feedback">
                                                 {{ 'Title is Required' | translate }}
                                             </div>
@@ -169,8 +169,8 @@
                                               </div>
                                             </ng-template>
                                           </select2>
-                                          <input type="number" class="form-control intl-input-padding" formControlName="phone"
-                                            placeholder="{{ 'Enter Phone' | translate }}" name="phone">
+                                          <input type="tel" class="form-control intl-input-padding" formControlName="phone"
+                                            placeholder="{{ 'Enter Phone' | translate }}" name="phone" inputmode="numeric" maxlength="10" autocomplete="off" (keypress)="onlyNumericKey($event)">
                                         </div>
                                         <div *ngIf="form.get('shipping_address.phone')?.touched && form.get('shipping_address.phone')?.errors?.['required']" class="invalid-feedback">
                                             {{ 'Phone is Required' | translate }}
@@ -194,7 +194,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3 form-box">
                                             <label for="name" class="form-label">{{ 'Title' | translate }}</label>
-                                            <input type="text" class="form-control" formControlName="title" id="name" placeholder="{{ 'Enter Name' | translate }}">
+                                            <input type="text" class="form-control" formControlName="title" id="btitle" placeholder="{{ 'Enter Name' | translate }}" autocomplete="off" (keypress)="onlyAlphaKey($event)">
                                             <div *ngIf="form.get('billing_address.title')?.touched && form.get('billing_address.title')?.errors?.['required']" class="invalid-feedback">
                                                 {{ 'Title is Required' | translate }}
                                             </div>
@@ -265,8 +265,8 @@
                                               </div>
                                             </ng-template>
                                           </select2>
-                                          <input type="number" class="form-control intl-input-padding" formControlName="phone"
-                                            placeholder="{{ 'Enter Phone' | translate }}" name="phone" maxlength="10" minlength="10">
+                                          <input type="tel" class="form-control intl-input-padding" formControlName="phone"
+                                            placeholder="{{ 'Enter Phone' | translate }}" name="phone" inputmode="numeric" maxlength="10" autocomplete="off" (keypress)="onlyNumericKey($event)">
                                         </div>
                                         <div *ngIf="form.get('billing_address.phone')?.touched && form.get('billing_address.phone')?.errors?.['required']" class="invalid-feedback">
                                             {{ 'Phone is Required' | translate }}

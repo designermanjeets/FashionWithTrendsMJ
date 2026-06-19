@@ -96,7 +96,7 @@ export const themeOptionsfashionTrends = {
             "title": null,
             "sub_title": null,
             "footer_copyright": true,
-            "copyright_content": "Copyright 2025 © SURAJ WELLNESS PVT LTD",
+            "copyright_content": "Copyright 2026 © SURAJ WELLNESS PVT LTD",
             "footer_about": null,
             "about_address": "Office No-1104, 11th Floor, Galaxy Diamond Plaza, Sector 4, Greater Noida West,Noida, Uttar Pradesh - 201306",
             "about_email": "support@fashionwithtrends.com",
