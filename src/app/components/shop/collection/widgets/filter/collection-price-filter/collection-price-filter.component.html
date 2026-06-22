@@ -3,22 +3,24 @@
   <div class="price-inputs mb-3">
     <div class="input-group">
       <span class="input-group-text">{{ 'min' | translate }}</span>
-      <input 
-        type="number" 
-        class="form-control" 
+      <input
+        type="number"
+        class="form-control"
         [(ngModel)]="minPrice"
         (ngModelChange)="onMinPriceChange($event)"
+        (change)="applyFilter()"
         [min]="minRange"
         [max]="maxRange"
         step="1">
     </div>
     <div class="input-group">
       <span class="input-group-text">{{ 'max' | translate }}</span>
-      <input 
-        type="number" 
-        class="form-control" 
+      <input
+        type="number"
+        class="form-control"
         [(ngModel)]="maxPrice"
         (ngModelChange)="onMaxPriceChange($event)"
+        (change)="applyFilter()"
         [min]="minRange"
         [max]="maxRange"
         step="1">
