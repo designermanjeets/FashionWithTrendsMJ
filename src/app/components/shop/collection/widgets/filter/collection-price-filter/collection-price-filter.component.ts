@@ -13,13 +13,13 @@ import { Subscription } from 'rxjs';
 export class CollectionPriceFilterComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() filter: Params;
-  @Input() maxPriceRange: number = 15000;
+  @Input() maxPriceRange: number = 6000;
   @Input() isLoading: boolean = false;
 
   public minPrice: number = 300;
-  public maxPrice: number = 15000;
+  public maxPrice: number = 6000;
   public minRange: number = 300;
-  public maxRange: number = 15000;
+  public maxRange: number = 6000;
   
   private scrollPosition: [number, number] = [0, 0];
   private shouldPreserveScroll: boolean = false;
